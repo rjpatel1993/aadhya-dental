@@ -16,7 +16,7 @@ const Header = () => {
 
   const navLinks = [
     { href: "#home", label: "Home" },
-    { href: "#services", label: "Services" },
+    { href: "/services", label: "Services", isRoute: true },
     { href: "#about", label: "About" },
     { href: "#testimonials", label: "Testimonials" },
     { href: "#contact", label: "Contact" },
@@ -49,15 +49,25 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors font-sans"
-              >
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link) =>
+              link.isRoute ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors font-sans"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors font-sans"
+                >
+                  {link.label}
+                </a>
+              )
+            )}
           </div>
 
           {/* CTA Button */}
@@ -90,16 +100,27 @@ const Header = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 bg-background/98 backdrop-blur-md border-b border-border shadow-card">
             <div className="container mx-auto px-4 py-6 flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-base font-medium text-foreground hover:text-primary transition-colors py-2 font-sans"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </a>
-              ))}
+              {navLinks.map((link) =>
+                link.isRoute ? (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="text-base font-medium text-foreground hover:text-primary transition-colors py-2 font-sans"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {link.label}
+                  </a>
+                ) : (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="text-base font-medium text-foreground hover:text-primary transition-colors py-2 font-sans"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {link.label}
+                  </a>
+                )
+              )}
               <Button className="mt-4 w-full shadow-soft font-sans">
                 Book Appointment
               </Button>
